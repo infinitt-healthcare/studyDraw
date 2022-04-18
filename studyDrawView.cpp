@@ -139,10 +139,18 @@ void CstudyDrawView::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	else if (pDoc->uMouse_Mode == 0)
 	{
+		for (DrawBmp& bmp : pDoc->d_pictures) {
+			bmp.isClicked = false;
+		}
 		for (DrawBmp& bmp : pDoc->d_pictures)
 		{
 			CRect rect(bmp.pos2.x - 30, bmp.pos2.y - 30, bmp.pos2.x + 30, bmp.pos2.y + 30);
+
 			bmp.isClicked = rect.PtInRect(point);
+			if (bmp.isClicked) {
+				m_pDrawBmp = &bmp;
+				break;
+			}
 		}
 	}
 	
@@ -197,14 +205,14 @@ void CstudyDrawView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 	else if ((nFlags & MK_LBUTTON) == MK_LBUTTON && pDoc->uMouse_Mode == 0)
 	{
-		for (DrawBmp& bmp : pDoc->d_pictures)
-		{
-			if (bmp.isClicked)
+//		for (DrawBmp& bmp : pDoc->d_pictures)
+//		{
+			if (m_pDrawBmp != NULL)
 			{
-				pDoc->d_picture.pos2 = point;
-				pDoc->d_picture.drawBmp(&dc);
+				m_pDrawBmp->pos2 = point;
+				m_pDrawBmp->drawBmp(&dc);
 			}
-		}
+//		}
 	}
 
 	CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();

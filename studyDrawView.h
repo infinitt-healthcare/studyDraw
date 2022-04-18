@@ -14,7 +14,8 @@ protected: // serialization에서만 만들어집니다.
 // 특성입니다.
 public:
 	CstudyDrawDoc* GetDocument() const;
-	
+	DrawBmp* m_pDrawBmp;
+
 // 작업입니다.
 public:
 

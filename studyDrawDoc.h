@@ -7,12 +7,18 @@
 #include <vector>
 using namespace std;
 
+//class DrawShape {
+//public:
+//	virtual void draw(CDC* dc) const = 0;
+//
+//};
 
 class DrawLine
 {
 public:
 	LOGPEN line_Pen;
 	vector<CPoint> line_Array;
+
 	virtual void drawAllLine(CDC* dc) const
 	{
 		dc->MoveTo(line_Array[0]);
@@ -44,6 +50,7 @@ public:
 	LPCWSTR fileName;
 	CPoint pos1;
 	CPoint pos2;
+
 	bool isClicked = false;
 
 	void drawBmp(CDC* dc) const
@@ -67,7 +74,6 @@ public:
 			SRCCOPY);
 		MemDC.SelectObject(pOldBmp);
 		MemDC.DeleteDC();
-	
 	}
 };
 
@@ -83,6 +89,9 @@ public:
 	vector<DrawLine> d_lines;
 	DrawBmp d_picture;
 	vector<DrawBmp> d_pictures;
+	//DrawShape* m_pDrawShape;
+	//vector<DrawShape*> m_arrayShape;
+
 	int uMouse_Mode;
 // 작업입니다.
 public:
